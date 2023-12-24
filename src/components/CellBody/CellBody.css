@@ -1,0 +1,23 @@
+.body {
+    width: 100px;
+    height: 100px;
+    background-color: lightblue;
+    font-size: 32px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.x2 {
+    background-color: rgb(178, 178, 186);
+}
+
+.x4 {
+    background-color: rgb(182, 182, 159);
+}
+
+.x8 {
+    background-color: rgb(179, 154, 117);
+}
