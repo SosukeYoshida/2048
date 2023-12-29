@@ -1,4 +1,4 @@
-.body {
+.body{
     width: 100px;
     height: 100px;
     background-color: lightblue;
@@ -7,17 +7,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    /* transition: 1s all ease-in-out; */
+    }
     
-}
-
-.x2 {
+    .x2 {
     background-color: rgb(178, 178, 186);
-}
-
-.x4 {
+    }
+    
+    .x4 {
     background-color: rgb(182, 182, 159);
-}
-
-.x8 {
+    }
+    
+    .x8 {
     background-color: rgb(179, 154, 117);
-}
+    }
+    .x16 {
+    background-color: rgb(188, 144, 95);
+    }
+    .x32 {
+    background-color: rgb(186, 131, 69);
+    }
+    .x64 {
+    background-color: rgb(194, 101, 51);
+    }
