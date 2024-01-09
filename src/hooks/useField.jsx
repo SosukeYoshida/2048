@@ -93,7 +93,6 @@ export const useField = (setIsMove) => {
         }
         return slideArray
     }
-
     //空いているマスにランダムに2のセルを生成する
     const createCell = () => {
         const newCell = judge();
@@ -184,47 +183,30 @@ export const useField = (setIsMove) => {
     }
 
     // 一つ一つくっつくセルがあるか４方向を判定する
-
     const margeJude = () => {
         const newField = [...field];
-        let canSlide = [];
         for (const [yIndex, y] of newField.entries()) {
             for (const [xIndex, x] of y.entries()) {
-                // console.log(newField[yIndex][xIndex]);
-
-                //ゲームクリア
-                // if (newField[yIndex][xIndex] == 2048) {
-                //     setIsClear(true)
-                //     return true;
-                // }
                 //フィールドの空セルがないなら
-                console.log(newField[yIndex][xIndex] == 2048);
                 for (const Arr of cellArround) {
                     const [yArr, xArr] = Arr;
                     let yNum = yIndex + yArr;
                     let xNum = xIndex + xArr;
-
                     if (outField(yNum, xNum)) {
-                        // 今探索しているセルと４方向探索で見たセルの値が同じなら hasSameAdjacentCell を true に設定
-                        //空セルがあるかを判定する
-
+                        // 空セルがあるならまだ動ける
                         if (newField[yNum][xNum] === 0) {
-                            return false;
+                            return true;
                         }
-                        if (newField[yIndex][xIndex] === newField[yNum][xNum]) {
-                            canSlide.push([yNum, xNum])
-                            break;
+                        //今見ている数字が0でないかつの周りにあるセルが自分の数字と同じならまだ動ける
+                        if (newField[yNum][xNum] !== 0 && newField[yIndex][xIndex] !== 0 && newField[yIndex][xIndex] === newField[yNum][xNum]) {
+                            console.log(newField[yIndex][xIndex] === newField[yNum][xNum]);
+                            return true;
                         }
-                        // yNum += yArr;
-                        // xNum += xArr;
                     }
                 }
             }
         }
-        if (canSlide.length == 0) {
-            return true;
-        }
-        return true;
+        return false;
     }
 
 
@@ -249,7 +231,7 @@ export const useField = (setIsMove) => {
             return;
         }
         // console.log(isGameOver); // ここでログを出力する
-        if (isGameOver) {
+        if (!isGameOver &&field[0]) {
             setGameOverMessage("ゲームオーバー")
             console.log("ゲーム終了");
         }
@@ -263,5 +245,5 @@ export const useField = (setIsMove) => {
         }
     }, [isClear])
 
-    return { field, Move, createCell,claerMessage,gameOverMessage }
+    return { field, Move, createCell, claerMessage, gameOverMessage }
 }
