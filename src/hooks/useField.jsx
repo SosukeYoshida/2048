@@ -224,18 +224,18 @@ export const useField = (setIsMove) => {
         }
     }
 
+    const isGameOver = margeJude();
     useEffect(() => {
         checkClear()
-        const isGameOver = margeJude();
         if (field.length === 0) {
             return;
         }
         // console.log(isGameOver); // ここでログを出力する
-        if (!isGameOver &&field[0]) {
+        if (!isGameOver && field[0]) {
             setGameOverMessage("ゲームオーバー")
             console.log("ゲーム終了");
         }
-    }, [field]);
+    }, [field,isGameOver]);
 
 
     useEffect(() => {

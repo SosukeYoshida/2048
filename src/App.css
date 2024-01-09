@@ -16,7 +16,17 @@
     /* border-radius: 20px; */
     display: grid;
     grid-template-columns: repeat(4, 100px);
-    grid-auto-rows  : "100px";
+    grid-auto-rows: "100px";
     margin: auto;
     border: 1px solid lightgrey;
+}
+
+.game-over {
+    color: rgb(187, 109, 197);
+    font-size: 64px;
+    font-weight: bold;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%,-50%);
 }
