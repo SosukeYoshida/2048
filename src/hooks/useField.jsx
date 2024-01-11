@@ -5,6 +5,7 @@ export const useField = (setIsMove) => {
 
     const [field, setField] = useState([]);
     const [marge, setMarge] = useState([]);
+    const [initMarge, setInitMarge] = useState([]);
     const [gameOverMessage, setGameOverMessage] = useState("");
     const [claerMessage, setClearMessage] = useState("");
     const [isClear, setIsClear] = useState(false);
@@ -20,10 +21,10 @@ export const useField = (setIsMove) => {
     ];
     //初期配列:デバッグ作業用
     const cells = [
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
+        [2, 8, 2, 4],
+        [3, 2, 0, 2],
+        [4, 4, 0, 0],
+        [4, 0, 0, 0],
     ]
 
     //4方向探索配列
@@ -40,17 +41,19 @@ export const useField = (setIsMove) => {
         //初期配列代入
         setField(cells);
         setMarge(margeBool)
+        const initMarge = JSON.parse(JSON.stringify(margeBool));
+        setInitMarge(initMarge);
         //２をランダムな位置にセットする
         let randomRow;
         let randomColumn;
-        setField((prevField) => {
-            for (let i = 0; i < 2; i++) {
-                randomRow = Math.floor(Math.random() * 4)
-                randomColumn = Math.floor(Math.random() * 4)
-                prevField[randomRow][randomColumn] = 2
-            }
-            return [...prevField]
-        })
+        // setField((prevField) => {
+        //     for (let i = 0; i < 2; i++) {
+        //         randomRow = Math.floor(Math.random() * 4)
+        //         randomColumn = Math.floor(Math.random() * 4)
+        //         prevField[randomRow][randomColumn] = 2
+        //     }
+        //     return [...prevField]
+        // })
     }
     useEffect(() => {
         createField()
@@ -93,6 +96,7 @@ export const useField = (setIsMove) => {
         }
         return slideArray
     }
+
     //空いているマスにランダムに2のセルを生成する
     const createCell = () => {
         const newCell = judge();
@@ -138,7 +142,7 @@ export const useField = (setIsMove) => {
                     setField((prevField) => {
                         const slideField = [...prevField]
                         const fieldNum = 4
-                        rightMove(fieldNum, prevField, marge, setIsMove);
+                        rightMove(fieldNum, prevField, marge, setIsMove, initMarge, setMarge);
 
                         return slideField
                     })
@@ -151,7 +155,7 @@ export const useField = (setIsMove) => {
                     setField((prevField) => {
                         const slideField = [...prevField]
                         const fieldNum = 4
-                        leftMove(fieldNum, prevField, marge, setIsMove)
+                        leftMove(fieldNum, prevField, marge, setIsMove, initMarge, setMarge)
                         return slideField
                     })
                     setMarge(margeBool);
@@ -161,7 +165,7 @@ export const useField = (setIsMove) => {
                     setField((prevField) => {
                         const slideField = [...prevField]
                         const fieldNum = 4
-                        upMove(fieldNum, prevField, marge, setIsMove)
+                        upMove(fieldNum, prevField, marge, setIsMove, initMarge, setMarge)
 
                         return slideField
                     })
@@ -172,7 +176,7 @@ export const useField = (setIsMove) => {
                     setField((prevField) => {
                         const slideField = [...prevField]
                         const fieldNum = 4
-                        downMove(fieldNum, prevField, marge, setIsMove)
+                        downMove(fieldNum, prevField, marge, setIsMove, initMarge, setMarge)
 
                         return slideField
                     })
@@ -183,6 +187,7 @@ export const useField = (setIsMove) => {
     }
 
     // 一つ一つくっつくセルがあるか４方向を判定する
+
     const margeJude = () => {
         const newField = [...field];
         for (const [yIndex, y] of newField.entries()) {
@@ -192,8 +197,11 @@ export const useField = (setIsMove) => {
                     const [yArr, xArr] = Arr;
                     let yNum = yIndex + yArr;
                     let xNum = xIndex + xArr;
+
                     if (outField(yNum, xNum)) {
-                        // 空セルがあるならまだ動ける
+                        // 今探索しているセルと４方向探索で見たセルの値が同じなら hasSameAdjacentCell を true に設定
+                        //空セルがあるかを判定する
+
                         if (newField[yNum][xNum] === 0) {
                             return true;
                         }
@@ -235,7 +243,7 @@ export const useField = (setIsMove) => {
             setGameOverMessage("ゲームオーバー")
             console.log("ゲーム終了");
         }
-    }, [field,isGameOver]);
+    }, [field, isGameOver]);
 
 
     useEffect(() => {

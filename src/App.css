@@ -1,32 +1,39 @@
 .title {
-    font-size: 40px;
-    display: flex;
-    justify-content: center;
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
 }
 
 .frame {
-    background-color: lightcyan;
-    width: 400px;
-    height: 400px;
-    margin: auto;
-    /* border-radius: 20px; */
+  color: #776e65;
+  width: 400px;
+  height: 400px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
 }
 
 .board {
-    /* border-radius: 20px; */
-    display: grid;
-    grid-template-columns: repeat(4, 100px);
-    grid-auto-rows: "100px";
-    margin: auto;
-    border: 1px solid lightgrey;
+  /* border-radius: 20px; */
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  grid-auto-rows: "100px";
+  border: 2px solid rgb(193, 50, 74);
 }
 
+.clear {
+  font-size: 24px;
+  font-weight: bold;
+  color: red;
+}
 .game-over {
-    color: rgb(187, 109, 197);
-    font-size: 64px;
-    font-weight: bold;
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+  color: rgb(187, 109, 197);
+  font-size: 64px;
+  font-weight: bold;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%,-50%);
 }
