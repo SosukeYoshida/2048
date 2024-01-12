@@ -21,10 +21,10 @@ export const useField = (setIsMove) => {
     ];
     //初期配列:デバッグ作業用
     const cells = [
-        [2, 8, 2, 4],
-        [3, 2, 0, 2],
-        [4, 4, 0, 0],
-        [4, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
     ]
 
     //4方向探索配列
@@ -34,8 +34,6 @@ export const useField = (setIsMove) => {
         [1, 0],
         [0, -1],
     ]
-
-
     //フィールド作成
     const createField = () => {
         //初期配列代入
@@ -44,16 +42,23 @@ export const useField = (setIsMove) => {
         const initMarge = JSON.parse(JSON.stringify(margeBool));
         setInitMarge(initMarge);
         //２をランダムな位置にセットする
-        let randomRow;
-        let randomColumn;
-        // setField((prevField) => {
-        //     for (let i = 0; i < 2; i++) {
-        //         randomRow = Math.floor(Math.random() * 4)
-        //         randomColumn = Math.floor(Math.random() * 4)
-        //         prevField[randomRow][randomColumn] = 2
-        //     }
-        //     return [...prevField]
-        // })
+        let randomRow1 = 0,
+            randomColumn1 = 0,
+            randomRow2 = 0,
+            randomColumn2 = 0;
+        setField((prevField) => {
+            //重複しないようにする
+            do {
+                randomRow1 = Math.floor(Math.random() * 4);
+                randomColumn1 = Math.floor(Math.random() * 4);
+                randomRow2 = Math.floor(Math.random() * 4);
+                randomColumn2 = Math.floor(Math.random() * 4);
+            } while (
+                (randomRow1 === randomRow2 && randomColumn1 === randomColumn2));
+            prevField[randomRow1][randomColumn1] = Math.floor(Math.random() * 2) === 0 ? 2 : 4;
+            prevField[randomRow2][randomColumn2] = Math.floor(Math.random() * 2) === 0 ? 2 : 4;
+            return [...prevField]
+        })
     }
     useEffect(() => {
         createField()
@@ -97,14 +102,14 @@ export const useField = (setIsMove) => {
         return slideArray
     }
 
-    //空いているマスにランダムに2のセルを生成する
+    //空いているマスにランダムに2か4のセルを生成する
     const createCell = () => {
         const newCell = judge();
         if (newCell.length > 0) {
             const randomNum = Math.floor(Math.random() * newCell.length);
             const [canPutY, canPutX] = newCell[randomNum];
             setField((prevField) => {
-                prevField[canPutY][canPutX] = 2
+                prevField[canPutY][canPutX] = Math.floor(Math.random() * 2) === 0 ? 2 : 4;
                 return prevField
             })
         }
