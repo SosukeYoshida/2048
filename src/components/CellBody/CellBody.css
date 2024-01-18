@@ -1,32 +1,55 @@
-.body{
-    width: 100px;
-    height: 100px;
+.body {
+    width: 120px;
+    height: 120px;
     background-color: lightblue;
-    font-size: 32px;
+    font-size: 40px;
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
     /* transition: 1s all ease-in-out; */
-    }
-    
-    .x2 {
-    background-color: rgb(178, 178, 186);
-    }
-    
-    .x4 {
-    background-color: rgb(182, 182, 159);
-    }
-    
-    .x8 {
-    background-color: rgb(179, 154, 117);
-    }
-    .x16 {
-    background-color: rgb(188, 144, 95);
-    }
-    .x32 {
-    background-color: rgb(186, 131, 69);
-    }
-    .x64 {
+}
+
+.x2 {
+    background-color: rgb(122, 128, 173);
+}
+
+.x4 {
+    background-color: rgb(96, 164, 101);
+}
+
+.x8 {
+    background-color: rgb(150, 179, 105);
+}
+
+.x16 {
+    background-color: rgb(183, 178, 105);
+}
+
+.x32 {
+    background-color: rgb(195, 134, 63);
+}
+
+.x64 {
     background-color: rgb(194, 101, 51);
-    }
+}
+
+.x128 {
+    background-color: rgb(201, 75, 33);
+}
+
+.x256 {
+    background-color: rgb(103, 88, 178);
+}
+
+.x512 {
+    background-color: rgb(183, 86, 162);
+}
+
+.x1024 {
+    background-color: rgb(93, 169, 188);
+}
+
+.x2048 {
+    background-color: rgb(78, 168, 105);
+}

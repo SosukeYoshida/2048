@@ -9,7 +9,7 @@ export const useField = (setIsMove) => {
     const [gameOverMessage, setGameOverMessage] = useState("");
     const [claerMessage, setClearMessage] = useState("");
     const [isClear, setIsClear] = useState(false);
-    // const [isGameOver, setIsGameOver] = useState(false);
+
     //合体したか判断するやつ
 
     //初期化用
@@ -141,7 +141,6 @@ export const useField = (setIsMove) => {
             const downCheck = y + 1 < 4;
             const leftCheck = x - 1 >= 0;
             const rightCheck = x + 1 < 4;
-            // console.log(upCheck);
             if (rightCheck && newField[y][x]) {
                 if (e.key == "ArrowRight") {
                     setField((prevField) => {
@@ -227,7 +226,6 @@ export const useField = (setIsMove) => {
         const newField = [...field];
         for (const [yIndex, y] of newField.entries()) {
             for (const [xIndex, x] of y.entries()) {
-                // console.log(newField[yIndex][xIndex]);
                 //ゲームクリア
                 if (newField[yIndex][xIndex] == 2048) {
                     setIsClear(true)
@@ -243,10 +241,8 @@ export const useField = (setIsMove) => {
         if (field.length === 0) {
             return;
         }
-        // console.log(isGameOver); // ここでログを出力する
         if (!isGameOver && field[0]) {
             setGameOverMessage("ゲームオーバー")
-            console.log("ゲーム終了");
         }
     }, [field, isGameOver]);
 
@@ -254,9 +250,8 @@ export const useField = (setIsMove) => {
     useEffect(() => {
         if (isClear) {
             setClearMessage("ゲームクリア")
-            console.log("ゲームクリア");
         }
     }, [isClear])
 
-    return { field, Move, createCell, claerMessage, gameOverMessage }
+    return { field, Move, createCell, claerMessage, gameOverMessage, isClear }
 }

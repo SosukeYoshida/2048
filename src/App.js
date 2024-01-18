@@ -5,17 +5,20 @@ import { Cell } from './components/Cell/Cell';
 
 function App() {
   const [isMove, setIsMove] = useState(false);
-  const { field, Move, createCell, claerMessage, gameOverMessage } = useField(setIsMove);
+  const { field, Move, createCell, claerMessage, gameOverMessage, isClear } = useField(setIsMove);
 
 
   //フィールドの状態を見る
   useEffect(() => {
-    document.addEventListener("keydown", Move);
-    return () => {
-      document.removeEventListener("keydown", Move)
+    //クリアしていないなら
+    if (!isClear) {
+      document.addEventListener("keydown", Move);
+      return () => {
+        document.removeEventListener("keydown", Move)
+      }
     }
 
-  }, [field])
+  }, [field, isClear])
 
   useEffect(() => {
     if (isMove) {

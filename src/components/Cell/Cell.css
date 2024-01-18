@@ -1,7 +1,6 @@
 .cell {
-    width: 100px;
-    height: 100px;
-    background-color: lightpink;
+    width: 120px;
+    height: 120px;
+    background-color: rgba(238, 228, 218, 0.35);;
     transition: 1s all ease-in-out;
-    border: 1px solid rgb(193, 50, 74);
 }
